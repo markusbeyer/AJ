@@ -86,3 +86,24 @@ def AJ():
        time.sleep(0.5)
        
 
+#opening journal and counting the appearances of journal entrys from today in it
+def check_journal():
+       global jcount
+       global jjcount
+       if   os.path.exists("Archives\\AJ.docx") == True:
+              doc = docx.Document("Archives\\AJ.docx")
+              fullText = ""
+              for para in doc.paragraphs:
+                     fullText = fullText + str(para.text)
+              found  = re.findall(str(today), str(fullText))
+       elif os.path.exists("Archives\\AJ.docx") == False:
+              found = []
+       jcount = 0
+       for i in found:
+           jcount += 1
+       jjcount = "Entries"
+       if str(jcount) == "1":
+              jjcount = "Entry"
+
+
+AJ()
